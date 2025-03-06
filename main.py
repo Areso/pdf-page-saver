@@ -33,9 +33,11 @@ def resave_pdf(input_path: str, output_path: str, raw_pages)->int:
     reader = PdfReader(input_path)
     writer = PdfWriter()
     # Iterate through all pages and add them to the writer
+    i = 0
     for page in reader.pages:
         if i in prep_pages:
             writer.add_page(page)
+        i += 1
     # Add metadata (optional)
     writer.add_metadata(reader.metadata)
     # Write the compressed PDF
