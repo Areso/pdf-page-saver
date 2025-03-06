@@ -29,7 +29,9 @@ def prepare_array(raw_pages):
 def resave_pdf(input_path: str, output_path: str, raw_pages)->int:
     prep_pages, err = prepare_array(raw_pages)
     if err == 1:
-        return 1
+        print("Can't parse page numbers from input\n")
+        print("Either XX,XY,XZ or X-ZZ\n")
+        sys.exit()
     reader = PdfReader(input_path)
     writer = PdfWriter()
     # Iterate through all pages and add them to the writer
@@ -60,12 +62,12 @@ if __name__ == "__main__":
     print(args.output_file)
     print(args.pages)
     if args.source_file is None:
-        print("Please, provide source filename. Exiting")
+        print("Please, provide source filename. Exiting\n")
         sys.exit()
     if args.output_file is None:
-        print("Please, provide output filename. Exiting")
+        print("Please, provide output filename. Exiting\n")
         sys.exit()
     if args.pages is None:
-        print("Please, provide pages numbers to save, comma or hyphen divided. Exiting")
+        print("Please, provide pages numbers to save, comma or hyphen divided. Exiting\n")
         sys.exit()
     resave_pdf(args.source_file, args.output_file, args.pages)
